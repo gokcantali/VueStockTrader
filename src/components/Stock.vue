@@ -5,7 +5,9 @@
         <h4>
           {{ stock.name }} <small><small>(Price: {{ stock.price }}
           <template v-if="isMyStock"> | Quantity: {{ stock.quantity }})
-          </template></small></small>
+          </template>
+          <template v-else>)</template>
+          </small></small>
         </h4>
       </div>
       <div class="panel-body">

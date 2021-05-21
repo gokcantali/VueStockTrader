@@ -39,7 +39,6 @@
         }
 
         const didBuyStock = this.addStockToPortfolio(stock);
-        console.log(didBuyStock);
         if(didBuyStock)
           this.decreaseFunds(totalPrice);
       }

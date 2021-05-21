@@ -13,7 +13,7 @@ Vue.filter('separateByThousand', function sepByThousand(val) {
 	const [decimalStr, pointStr] = valStr.split("."); // divide into decimal and points
 
 	const decimalStrReverse = decimalStr.split("").reverse().join(""); // reverse the string
-	const decimalStrReverseSep = decimalStrReverse.replace(/(\d{3})/g, '$1,');  // add thousand separators
+	const decimalStrReverseSep = decimalStrReverse.length > 3 ? decimalStrReverse.replace(/(\d{3})/g, '$1,') : decimalStrReverse;  // add thousand separators
 	const decimalStrSep = decimalStrReverseSep.split("").reverse().join(""); // re-reverse the string
 
 	let valStrSep = decimalStrSep.replace(/^\./, ''); // trim leading separator
@@ -21,12 +21,12 @@ Vue.filter('separateByThousand', function sepByThousand(val) {
 	return valStrSep 
 });
 
+Vue.use(VueRouter);
+
 const router = new VueRouter({
 	routes,
 	mode: 'history', // no hashtag (#) in this mode
 });
-
-Vue.use(VueRouter);
 
 new Vue({
   el: '#app',

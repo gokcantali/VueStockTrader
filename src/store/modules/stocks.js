@@ -25,16 +25,10 @@ const getters = {
 };
 
 const mutations = {
-	updateStockValue: (state, name, newPrice) => {
+	updateStockValue: (state, updatedStock) => {
+		const { name, price } = updatedStock
 		const stock = state.stocks.find((s) => s.name == name) || null;
-		if(stock){
-			stock.price = newPrice;
-		}
-		else{
-			alert(`No such stock: ${name}`);
-			return false;
-		}
-		return true;
+		stock.price = price;
 	},
 	addStockToPortfolio: (state, addedStock) => {
 		const { name, quantity } = addedStock
@@ -78,6 +72,32 @@ const actions = {
 			else {
 				reject(`No such stock! ${name}`);
 			}
+		});
+	},
+	changeStockPrices: ({ commit, getters }, payload) => {
+		const minChange = 5;	// in percent
+		const maxChange = 25;	// in percent
+
+		getters.stocks.map((stock) => {
+			let name = stock.name;
+			let price = stock.price;
+
+			// generate random price change percentage
+			let change = (
+				Math.random() * 
+				(maxChange - minChange) + 
+				minChange
+			) / 100;
+
+			if(Math.random() < 0.40) { // decrease stock price
+				price -= price*change;
+			} 
+			else {	// increase stock price
+				price += price*change;
+			}
+			price = Math.round(price); // make price an integer
+
+			commit('updateStockValue', {name, price});
 		});
 	}
 };

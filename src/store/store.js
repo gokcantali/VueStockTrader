@@ -9,10 +9,14 @@ export const store = new Vuex.Store({
 
 	state: {
 		funds: 10000,
+		day: 1
 	},
 	getters: {
 		funds: (state) => {
 			return state.funds;
+		},
+		day: (state) => {
+			return state.day;
 		}
 	},
 	mutations: {
@@ -24,6 +28,9 @@ export const store = new Vuex.Store({
 		},
 		decreaseFunds: (state, amount) => {
 			state.funds -= amount;
+		},
+		increaseDay: (state) => {
+			state.day++;
 		}
 	},
 	modules: {

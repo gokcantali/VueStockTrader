@@ -20,9 +20,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a class="navbar-brand" href="#">
-            End Day
-          </a>
+          <a style="cursor: pointer;" @click="increaseDay">End Day</a>
         </li>
         <li role="presentation" class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Save & Load <span class="caret"></span> </a>
@@ -43,11 +41,14 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters(['funds'])
+  },
+  methods: {
+    ...mapMutations(['increaseDay'])
   }
 }
 </script>
