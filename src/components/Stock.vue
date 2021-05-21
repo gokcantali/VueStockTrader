@@ -1,6 +1,5 @@
 <template>
-  <div>
-
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
     <div :class="['panel', {'panel-info': isMyStock, 'panel-success': !isMyStock}]" >
       <div class="panel-heading">
         <h4>
@@ -14,7 +13,7 @@
           <div class="col-xs-9 col-sm-7 col-md-5 col-lg-2">
             <input v-model="quantity" type="number" class="form-control" placeholder="Quantity">
           </div>
-          <div class="col-sm-offset-2 col-md-offset-4 col-lg-offset-7 col-xs-3">
+          <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-4 col-lg-offset-7 col-xs-2">
             <button v-if="isMyStock" :disabled="!quantity" @click.prevent="submittedSell" type="button" class="btn btn-danger">Sell</button>
             <button v-else :disabled="!quantity" @click.prevent="submittedBuy" type="button" class="btn btn-success">Buy</button>
           </div>
