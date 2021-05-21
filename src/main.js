@@ -1,6 +1,8 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router';
 import App from './App.vue'
 
+import { routes } from './routes.js';
 import { store } from './store/store.js';
 
 require('bootstrap'); // needed for dropdown
@@ -19,8 +21,16 @@ Vue.filter('separateByThousand', function sepByThousand(val) {
 	return valStrSep 
 });
 
+const router = new VueRouter({
+	routes,
+	mode: 'history', // no hashtag (#) in this mode
+});
+
+Vue.use(VueRouter);
+
 new Vue({
   el: '#app',
   store,
+  router,
   render: h => h(App)
 })
