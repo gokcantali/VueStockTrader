@@ -1,11 +1,11 @@
 <template>
   <div class="row">
-    <app-stock v-for="stock in portfolio" :stock="stock" :isMyStock="true" :key="stock.name" @stockSold="stockSold"></app-stock>
+    <app-stock v-for="stock in myStocks" :stock="stock" :isMyStock="true" :key="stock.name" @stockSold="stockSold"></app-stock>
   </div>
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapGetters, mapMutations, mapActions } from 'vuex';
   import Stock from './Stock.vue';
 
   export default {
@@ -16,27 +16,31 @@
     },
     computed: {
       ...mapGetters([
-        'stocks',
-        'portfolio'
-      ])
+        'funds',
+        'stocks'
+      ]),
+      myStocks() {
+        return this.stocks.filter((s) => s.quantity > 0);
+      }
     },
     methods: {
       ...mapMutations([
-        'updateFunds',
-        'remoteStockFromPortfolio'
+        'increaseFunds'
       ]),
-      stockSold (name, quantity) {
+      ...mapActions([
+        'removeStockFromPortfolio'
+      ]),
+      stockSold (stock) {
+        const { name, quantity } = stock;
+
         const price = this.stocks.find((s) => s.name == name).price;
-        const quantityOwn = this.portfolio.find((s) => s.name == name).quantity;
-        if(quantity > quantityOwn){
-          alert("You don't have enough stock!");
-          return;
-        }
-        
         const totalPrice = price * quantity;
 
-        this.remoteStockFromPortfolio(name, quantity);
-        this.updateFunds(this.funds + totalPrice);
+        this.removeStockFromPortfolio(stock).then(() => {
+          this.increaseFunds(totalPrice);
+        }).catch((error) => {
+          alert(error);
+        });
       }
     },
     components: {

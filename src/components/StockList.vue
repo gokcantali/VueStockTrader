@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapGetters, mapMutations, mapActions } from 'vuex';
   import Stock from './Stock.vue';
 
   export default {
@@ -23,21 +23,25 @@
     },
     methods: {
       ...mapMutations([
-        'updateFunds',
+        'decreaseFunds'
+      ]),
+      ...mapActions([
         'addStockToPortfolio'
       ]),
-      stockBought (name, quantity) {
-        quantity = Number(quantity);
-        const price = this.stocks.find((s) => s.name == name).price;
-        
+      stockBought (stock) {
+        const { name, quantity } = stock;
+
+        const price = this.stocks.find((s) => s.name == name).price;        
         const totalPrice = price * quantity;
         if(totalPrice > this.funds){
           alert("You don't have enough money!");
-          return;
+          return false;
         }
 
-        this.addStockToPortfolio({name, quantity});
-        this.updateFunds(this.funds - totalPrice);
+        const didBuyStock = this.addStockToPortfolio(stock);
+        console.log(didBuyStock);
+        if(didBuyStock)
+          this.decreaseFunds(totalPrice);
       }
     },
     components: {
