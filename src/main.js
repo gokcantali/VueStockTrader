@@ -14,12 +14,19 @@ Vue.filter('separateByThousand', function sepByThousand(val) {
 	const [decimalStr, pointStr] = valStr.split("."); // divide into decimal and points
 
 	const decimalStrReverse = decimalStr.split("").reverse().join(""); // reverse the string
-	const decimalStrReverseSep = decimalStrReverse.length > 3 ? decimalStrReverse.replace(/(\d{3})/g, '$1,') : decimalStrReverse;  // add thousand separators
-	const decimalStrSep = decimalStrReverseSep.split("").reverse().join(""); // re-reverse the string
+	let decimalStrReverseSep = "";
+	for(let i = 1; i <= decimalStrReverse.length; i++) {
+		decimalStrReverseSep += decimalStrReverse[i-1];
+		// add a comma for every three digits
+		// don't add comma if it's the last digit
+		if(i % 3 == 0 && i != decimalStrReverse.length){
+			decimalStrReverseSep += ",";
+		}
+	}
+	let decimalStrSep = decimalStrReverseSep.split("").reverse().join(""); // re-reverse the string
 
-	let valStrSep = decimalStrSep.replace(/^\./, ''); // trim leading separator
-	if(pointStr !== undefined) { valStrSep += `.${pointStr}`} // add points if available
-	return valStrSep 
+	if(pointStr !== undefined) { decimalStrSep += `.${pointStr}`} // add points if available
+	return decimalStrSep 
 });
 
 Vue.use(VueRouter);
