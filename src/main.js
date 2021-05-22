@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
 import App from './App.vue'
 
 import { routes } from './routes.js';
@@ -27,6 +28,10 @@ const router = new VueRouter({
 	routes,
 	mode: 'history', // no hashtag (#) in this mode
 });
+
+Vue.use(VueResource);
+// globally set HTTP root
+Vue.http.options.root = 'https://my-vuejs-project-ce8a3-default-rtdb.firebaseio.com/' 
 
 new Vue({
   el: '#app',

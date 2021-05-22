@@ -20,13 +20,13 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a style="cursor: pointer;" @click="increaseDay">End Day</a>
+          <a @click="increaseDay">End Day</a>
         </li>
         <li role="presentation" class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Save & Load <span class="caret"></span> </a>
           <ul class="dropdown-menu">
-            <li><a href="#save">Save</a></li>
-            <li><a href="#load">Load</a></li>
+            <li><a @click="$emit('save')">Save</a></li>
+            <li><a @click="$emit('load')">Load</a></li>
           </ul>
         </li>
         <li>
@@ -66,5 +66,8 @@ export default {
   }
   li.chosen {
     font-weight: bold;
+  }
+  ul a {
+    cursor: pointer;
   }
 </style>

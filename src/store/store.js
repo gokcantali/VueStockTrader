@@ -33,6 +33,11 @@ export const store = new Vuex.Store({
 			state.day++;
 		}
 	},
+	actions: {
+		updateFunds: ({ commit }, newValue) => {
+			commit('updateFunds', newValue);
+		}
+	},
 	modules: {
 		stocks
 	}

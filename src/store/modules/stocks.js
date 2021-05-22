@@ -39,6 +39,9 @@ const mutations = {
 		const { name, quantity } = removedStock
 		const stock = state.stocks.find((s) => s.name == name);
 		stock.quantity -= quantity;
+	},
+	updateAllStocks: (state, stockData) => {
+		state.stocks = stockData;
 	}
 };
 
@@ -99,6 +102,9 @@ const actions = {
 
 			commit('updateStockValue', {name, price});
 		});
+	},
+	updateAllStocks: ({ commit }, stocks) => {
+		commit('updateAllStocks', stocks);
 	}
 };
 
