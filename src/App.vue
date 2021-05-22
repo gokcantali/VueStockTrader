@@ -7,7 +7,9 @@
         <br>
         <app-alert v-if="alertBox.show" :type="alertBox.type" :message="alertBox.message"></app-alert>
         <br>
-        <router-view></router-view>
+        <transition name="slide" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
   </div>
@@ -104,5 +106,38 @@ export default {
   }
   li.chosen {
     font-weight: bold;
+  }
+
+  .slide-enter-active {
+    animation: slide-in 0.5s ease-out forwards;
+  }
+
+  .slide-leave-active {
+    animation: slide-out 0.5s ease-out forwards;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+  }
+
+  .slide-leave {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @keyframes slide-in {
+    0% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-out {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-30px);
+    }
   }
 </style>
