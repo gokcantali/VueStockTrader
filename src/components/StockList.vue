@@ -17,8 +17,7 @@
     computed: {
       ...mapGetters([
         'stocks',
-        'funds',
-        'portfolio'
+        'funds'
       ])
     },
     methods: {
@@ -38,9 +37,11 @@
           return false;
         }
 
-        const didBuyStock = this.addStockToPortfolio(stock);
-        if(didBuyStock)
-          this.decreaseFunds(totalPrice);
+        this.addStockToPortfolio(stock).then(() => {
+          this.decreaseFunds(totalPrice); // decrease funds if purchase is successful
+        }).catch((error) => {
+          alert(error);
+        });
       }
     },
     components: {

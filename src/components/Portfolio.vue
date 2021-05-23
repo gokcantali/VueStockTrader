@@ -37,7 +37,7 @@
         const totalPrice = price * quantity;
 
         this.removeStockFromPortfolio(stock).then(() => {
-          this.increaseFunds(totalPrice);
+          this.increaseFunds(totalPrice); // increase funds if sale is successful
         }).catch((error) => {
           alert(error);
         });

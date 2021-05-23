@@ -46,6 +46,7 @@ const mutations = {
 };
 
 const actions = {
+	// used when the user buys stocks
 	addStockToPortfolio: ({ commit, getters }, addedStock) => {
 		return new Promise((resolve, reject) => {
 			const { name, quantity } = addedStock
@@ -59,6 +60,7 @@ const actions = {
 			}
 		});
 	},
+	// used when the user buys stocks
 	removeStockFromPortfolio: ({ commit, getters }, removedStock) => {
 		return new Promise((resolve, reject) => {
 			const { name, quantity } = removedStock
@@ -77,6 +79,7 @@ const actions = {
 			}
 		});
 	},
+	// randomizes stock prices based on a simple logic
 	changeStockPrices: ({ commit, getters }, payload) => {
 		const minChange = 5;	// in percent
 		const maxChange = 25;	// in percent

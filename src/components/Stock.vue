@@ -16,7 +16,7 @@
             <input v-model="quantity" type="number" class="form-control" placeholder="Quantity">
           </div>
           <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-lg-offset-3 col-xs-2 col-md-1">
-            <button v-if="isMyStock" :disabled="!quantity" @click.prevent="submittedSell" type="button" class="btn btn-danger">Sell</button>
+            <button v-if="isMyStock" :disabled="!quantity || quantity <= 0" @click.prevent="submittedSell" type="button" class="btn btn-danger">Sell</button>
             <button v-else :disabled="!quantity" @click.prevent="submittedBuy" type="button" class="btn btn-success">Buy</button>
           </div>
         </div>
@@ -38,17 +38,19 @@
       }
     },
     methods: {
+      // to be used by StockList module
       submittedBuy() {
         const stock = {
           name: this.stock.name,
-          quantity: parseInt(this.quantity)
+          quantity: parseInt(this.quantity) // parse to number in case the value is string
         }
         this.$emit('stockBought', stock);
       },
+      // to be used by Portfolio module
       submittedSell() {
         const stock = {
           name: this.stock.name,
-          quantity: parseInt(this.quantity)
+          quantity: parseInt(this.quantity) // parse to number in case the value is string
         }
         this.$emit('stockSold', stock);
       }

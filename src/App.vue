@@ -45,50 +45,49 @@ export default {
   },
   methods: {
     ...mapActions(['changeStockPrices', 'updateFunds', 'updateAllStocks']),
+
+    // used when game is loaded or saved
     displayAlert(message, type, duration) {
       this.alertBox.type = type;
       this.alertBox.message = message;
       this.alertBox.show = true;
       setTimeout(() => {
         this.alertBox.show = false;
-      }, duration);
+      }, duration); // closes the alert after duration
     },
-    save() {
+    save() { // save the game
       const appState = {
         funds: this.funds, 
         stocks: this.stocks
       };
-      console.log(appState);
+
       this.$http
         .put('stock-trader.json', appState)
-        .then((response) => {
+        .then((response) => { // when response is retrieved
           this.displayAlert('Game Saved!', 'success', 2000);
         })
-        .catch((err) => {
+        .catch((err) => { // when response has errors
           this.displayAlert('Save failed!', 'danger', 2000);
           console.log(err);
         });
     },
-    load() {
+    load() { // load the game
       this.$http
         .get('stock-trader.json')
-        .then((response) => {
+        .then((response) => { // when response is retrieved
           response
           .json()
-          .then((state) => {
+          .then((state) => { // when json is returned
             this.updateFunds(state.funds);
             this.updateAllStocks(state.stocks);
             this.displayAlert('Game Load!', 'success', 2000);
           })
         })
-        .catch((err) => {
+        .catch((err) => { // when response has errors
           this.displayAlert('Load failed!', 'danger', 2000);
           console.log(err);
         });
     }
-  },
-  created() {
-    this.resource = this.$resource('stock-trader.json', {}, {});
   }
 }
 </script>
@@ -108,6 +107,7 @@ export default {
     font-weight: bold;
   }
 
+  /* CSS rules for animation between routes */
   .slide-enter-active {
     animation: slide-in 0.5s ease-out forwards;
   }

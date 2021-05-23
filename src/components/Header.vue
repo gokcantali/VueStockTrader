@@ -48,7 +48,7 @@ export default {
     ...mapGetters(['funds'])
   },
   methods: {
-    ...mapMutations(['increaseDay'])
+    ...mapMutations(['increaseDay']) // called when "End Day" is clicked
   }
 }
 </script>
@@ -68,6 +68,6 @@ export default {
     font-weight: bold;
   }
   ul a {
-    cursor: pointer;
+    cursor: pointer; /* we need this when a does not have href attribute */
   }
 </style>
