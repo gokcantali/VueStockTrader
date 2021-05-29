@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHistory} from 'vue-router';
-//import VueResource from 'vue-resource';
+import axios from 'axios';
 import App from './App.vue'
 
 import { routes } from './routes.js';
@@ -46,9 +46,7 @@ app.use(router);
 
 app.use(store);
 
-//app.use(VueResource);
+axios.defaults.baseURL = 'https://my-vuejs-project-ce8a3-default-rtdb.firebaseio.com'
+axios.defaults.headers.get['Accepts'] = 'application/json';
 
 app.mount("#app");
-
-// globally set HTTP root
-//app.http.options.root = 'https://my-vuejs-project-ce8a3-default-rtdb.firebaseio.com/' 

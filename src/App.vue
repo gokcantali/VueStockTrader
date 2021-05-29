@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 import Header from './components/Header.vue';
 import Alert from './components/Alert.vue';
@@ -61,27 +62,24 @@ export default {
         stocks: this.stocks
       };
 
-      this.$http
-        .put('stock-trader.json', appState)
-        .then(() => { // when response is retrieved
+      axios.put('stock-trader.json', appState)
+        .then(() => {
           this.displayAlert('Game Saved!', 'success', 2000);
         })
-        .catch((err) => { // when response has errors
+        .catch((err) => {
           this.displayAlert('Save failed!', 'danger', 2000);
           console.log(err);
-        });
+        })
     },
     load() { // load the game
-      this.$http
+      axios
         .get('stock-trader.json')
         .then((response) => { // when response is retrieved
-          response
-          .json()
-          .then((state) => { // when json is returned
-            this.updateFunds(state.funds);
-            this.updateAllStocks(state.stocks);
-            this.displayAlert('Game Load!', 'success', 2000);
-          })
+          const state = response.data;
+          console.log(response);
+          this.updateFunds(state.funds);
+          this.updateAllStocks(state.stocks);
+          this.displayAlert('Game Load!', 'success', 2000);
         })
         .catch((err) => { // when response has errors
           this.displayAlert('Load failed!', 'danger', 2000);
