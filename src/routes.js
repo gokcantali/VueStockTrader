@@ -6,5 +6,5 @@ export const routes = [
 	{ path: '', component: Home , name: 'home'},
 	{ path: '/stocks', component: StockList},
 	{ path: '/portfolio', component: Portfolio},
-	{ path: '*', redirect: '/'} // redirect every unknown URL to home page
+	{ path: '/:catchAll(.*)', redirect: '/'} // redirect every unknown URL to home page
 ];

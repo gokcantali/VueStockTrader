@@ -31,7 +31,7 @@
         </li>
         <li>
           <p class="navbar-brand funds">
-            Funds: ${{ funds }}
+            Funds: ${{ $filters.sepByThousand(funds) }}
           </p>
         </li>
       </ul>
