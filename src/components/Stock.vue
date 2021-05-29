@@ -16,7 +16,7 @@
             <input v-model="quantity" type="number" class="form-control" placeholder="Quantity">
           </div>
           <div class="col-xs-offset-1 col-sm-offset-2 col-md-offset-3 col-lg-offset-3 col-xs-2 col-md-1">
-            <button v-if="isMyStock" :disabled="!quantity || quantity <= 0" @click.prevent="submittedSell" type="button" class="btn btn-danger">Sell</button>
+            <button v-if="isMyStock" :disabled="!quantity || quantity <= 0" @click.prevent="submittedSell" type="button" class="btn btn-danger">Sell</button>
             <button v-else :disabled="!quantity" @click.prevent="submittedBuy" type="button" class="btn btn-success">Buy</button>
           </div>
         </div>
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
-
   export default {
     props: ['stock', 'isMyStock'],
     data() {

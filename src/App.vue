@@ -63,7 +63,7 @@ export default {
 
       this.$http
         .put('stock-trader.json', appState)
-        .then((response) => { // when response is retrieved
+        .then(() => { // when response is retrieved
           this.displayAlert('Game Saved!', 'success', 2000);
         })
         .catch((err) => { // when response has errors

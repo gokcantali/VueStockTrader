@@ -27,7 +27,7 @@ const getters = {
 const mutations = {
 	updateStockValue: (state, updatedStock) => {
 		const { name, price } = updatedStock
-		const stock = state.stocks.find((s) => s.name == name) || null;
+		const stock = state.stocks.find((s) => s.name == name) || null;
 		stock.price = price;
 	},
 	addStockToPortfolio: (state, addedStock) => {
@@ -49,7 +49,7 @@ const actions = {
 	// used when the user buys stocks
 	addStockToPortfolio: ({ commit, getters }, addedStock) => {
 		return new Promise((resolve, reject) => {
-			const { name, quantity } = addedStock
+			const { name } = addedStock
 			const stock = getters.stocks.find((s) => s.name == name) || null;
 			if(stock !== null){
 				commit('addStockToPortfolio', addedStock);
@@ -80,7 +80,7 @@ const actions = {
 		});
 	},
 	// randomizes stock prices based on a simple logic
-	changeStockPrices: ({ commit, getters }, payload) => {
+	changeStockPrices: ({ commit, getters }) => {
 		const minChange = 5;	// in percent
 		const maxChange = 25;	// in percent
 
