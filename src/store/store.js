@@ -1,11 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
 import stocks from './modules/stocks.js';
 
-Vue.use(Vuex);
-
-export const store = new Vuex.Store({
+export const store = createStore({
 
 	state: {
 		funds: 10000,

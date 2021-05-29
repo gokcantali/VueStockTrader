@@ -5,7 +5,7 @@
     <p>Click on 'End Day' to begin a new Day!
     </p>
     <hr>
-    <h4>Your Funds: ${{ funds | separateByThousand }}</h4>
+    <h4>Your Funds: ${{ funds }}</h4>
   </div>
 </template>
 

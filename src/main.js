@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router';
+import { createApp } from 'vue';
+import { createRouter, createWebHistory} from 'vue-router';
 import VueResource from 'vue-resource';
 import App from './App.vue'
 
@@ -8,7 +8,10 @@ import { store } from './store/store.js';
 
 require('bootstrap'); // needed for dropdown
 
+const app = createApp(App).mount("#app");
+
 // Register filters globally
+/*
 Vue.filter('separateByThousand', function sepByThousand(val) {
 	const valStr = String(val); // convert to String
 	const [decimalStr, pointStr] = valStr.split("."); // divide into decimal and points
@@ -28,21 +31,18 @@ Vue.filter('separateByThousand', function sepByThousand(val) {
 	if(pointStr !== undefined) { decimalStrSep += `.${pointStr}`} // add points if available
 	return decimalStrSep 
 });
+*/
 
-Vue.use(VueRouter);
-
-const router = new VueRouter({
+const router = createRouter({
 	routes,
-	mode: 'history', // no hashtag (#) in this mode
-});
-
-Vue.use(VueResource);
-// globally set HTTP root
-Vue.http.options.root = 'https://my-vuejs-project-ce8a3-default-rtdb.firebaseio.com/' 
-
-new Vue({
-  el: '#app',
-  store,
-  router,
-  render: h => h(App)
+	history: createWebHistory()
 })
+
+app.use(router);
+
+app.use(store);
+
+app.use(VueResource);
+
+// globally set HTTP root
+app.http.options.root = 'https://my-vuejs-project-ce8a3-default-rtdb.firebaseio.com/' 

@@ -31,7 +31,7 @@
         </li>
         <li>
           <p class="navbar-brand funds">
-            Funds: ${{ funds | separateByThousand }}
+            Funds: ${{ funds }}
           </p>
         </li>
       </ul>
