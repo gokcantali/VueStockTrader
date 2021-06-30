@@ -46,7 +46,7 @@ app.use(router);
 
 app.use(store);
 
-axios.defaults.baseURL = 'https://my-vuejs-project-ce8a3-default-rtdb.firebaseio.com'
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL ? process.env.VUE_APP_BASE_URL : '';
 axios.defaults.headers.get['Accepts'] = 'application/json';
 
 app.mount("#app");
